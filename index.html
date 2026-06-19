@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stapp Contracting â€” Wellington Civil Contractors</title>
+<title>Stapp Contracting &mdash; Wellington Civil Contractors</title>
 <meta name="description" content="Wellington's civil contracting specialists. Concrete, earthworks, groundwork and civil construction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -334,7 +334,7 @@ footer{background:#040A14;padding:72px 0 28px}
   .sp-im img{min-height:300px}
 }
 @media(max-width:768px){
-  .container{padding:0 24px}
+  .container{padding:0 20px}
   .nlinks,.nr{display:none}
   .ham{display:flex}
   .proc-steps{grid-template-columns:1fr 1fr}
@@ -344,16 +344,27 @@ footer{background:#040A14;padding:72px 0 28px}
   .cta-actions{justify-content:center}
   .foot-g{grid-template-columns:1fr}
   .frow2{grid-template-columns:1fr}
-  .sp-txt{padding:56px 32px}
+  .sp-txt{padding:48px 24px}
   body{cursor:auto}
   #cur,#cur2{display:none}
   a,button{cursor:pointer}
+  /* hero mobile */
+  #hero{align-items:flex-start;min-height:auto;height:auto}
+  .hero-content{padding-top:100px;padding-bottom:64px;max-width:100%}
+  .hh1{font-size:clamp(52px,13vw,82px)}
+  .htag span{font-size:9px;letter-spacing:.14em}
+  .hsub{font-size:14px;max-width:100%;color:rgba(255,255,255,.7)}
+  .hscroll{display:none}
+  .hero-readout{display:none}
+  .hdiv{margin:18px 0 16px}
+  .hv2{display:none}
 }
 @media(max-width:480px){
   .proc-steps{grid-template-columns:1fr}
-  .hbtns{flex-direction:column}
+  .hbtns{flex-direction:column;align-items:flex-start}
   .hero-readout{display:none}
   .sbig{min-width:120px;font-size:52px}
+  .btn-solid,.btn-line{width:100%;justify-content:center}
 }
 </style>
 </head>
@@ -422,7 +433,7 @@ footer{background:#040A14;padding:72px 0 28px}
   </div>
 </header>
 
-<!-- â•â•â• HERO â€” 3D â•â•â• -->
+<!-- â•â•â• HERO &mdash; 3D â•â•â• -->
 <section id="hero" aria-label="Hero">
   <canvas id="c3d" aria-hidden="true"></canvas>
   <div class="hv1" aria-hidden="true"></div>
@@ -431,7 +442,7 @@ footer{background:#040A14;padding:72px 0 28px}
     <div class="hero-content">
       <div class="htag">
         <div class="htag-l"></div>
-        <span>Wellington &middot; Porirua &middot; Hutt Valley &middot; KÄpiti</span>
+        <span>Wellington &middot; Porirua &middot; Hutt Valley &middot; K&amacr;piti</span>
       </div>
       <h1 class="hh1">
         <span class="hl"><span class="hli">Ground</span></span>
@@ -452,8 +463,8 @@ footer{background:#040A14;padding:72px 0 28px}
   <!-- Engineering readout overlay -->
   <div class="hero-readout" aria-hidden="true">
     <div class="readout-inner">
-      <div class="rd"><span class="rd-lbl">Fleet</span><span class="rd-val" id="rd-fleet">â€”</span></div>
-      <div class="rd"><span class="rd-lbl">Projects</span><span class="rd-val" id="rd-proj">â€”</span></div>
+      <div class="rd"><span class="rd-lbl">Fleet</span><span class="rd-val" id="rd-fleet">&mdash;</span></div>
+      <div class="rd"><span class="rd-lbl">Projects</span><span class="rd-val" id="rd-proj">&mdash;</span></div>
       <div class="rd"><span class="rd-lbl">Region</span><span class="rd-val rd-reg">Wellington</span></div>
     </div>
   </div>
@@ -488,7 +499,7 @@ footer{background:#040A14;padding:72px 0 28px}
   </div>
 </div>
 
-<!-- â•â•â• SERVICES â€” Full-Width Alternating Panels â•â•â• -->
+<!-- â•â•â• SERVICES &mdash; Full-Width Alternating Panels â•â•â• -->
 <section id="services" aria-label="Services">
 
   <div class="sp rv">
@@ -496,7 +507,7 @@ footer{background:#040A14;padding:72px 0 28px}
       <span class="sp-num">01</span>
       <div class="sp-cat">Concrete Works</div>
       <h2>Driveways, Paths & Foundations</h2>
-      <p>From residential driveways to commercial footpaths and structural foundations â€” we deliver quality concrete finishes built to last the Wellington climate.</p>
+      <p>From residential driveways to commercial footpaths and structural foundations &mdash; we deliver quality concrete finishes built to last the Wellington climate.</p>
       <div class="sp-tags">
         <span class="stag">Driveways</span><span class="stag">Footpaths</span>
         <span class="stag">Foundations</span><span class="stag">Asphalting</span>
@@ -511,7 +522,7 @@ footer{background:#040A14;padding:72px 0 28px}
       <span class="sp-num">02</span>
       <div class="sp-cat">Earthworks</div>
       <h2>Precision Earthmoving & Excavation</h2>
-      <p>Large-scale earthmoving, site levelling, land formation and excavation â€” operated by experienced professionals with modern machinery.</p>
+      <p>Large-scale earthmoving, site levelling, land formation and excavation &mdash; operated by experienced professionals with modern machinery.</p>
       <div class="sp-tags">
         <span class="stag">Excavation</span><span class="stag">Site Levelling</span>
         <span class="stag">Land Formation</span><span class="stag">Subdivisions</span>
@@ -526,7 +537,7 @@ footer{background:#040A14;padding:72px 0 28px}
       <span class="sp-num">03</span>
       <div class="sp-cat">Groundwork</div>
       <h2>Foundations, Drainage & Utilities</h2>
-      <p>Complete groundwork solutions â€” foundation excavation, stormwater and wastewater drainage, utility trenching and comprehensive site preparation.</p>
+      <p>Complete groundwork solutions &mdash; foundation excavation, stormwater and wastewater drainage, utility trenching and comprehensive site preparation.</p>
       <div class="sp-tags">
         <span class="stag">Foundations</span><span class="stag">Drainage</span>
         <span class="stag">Utilities</span><span class="stag">Site Prep</span>
@@ -541,7 +552,7 @@ footer{background:#040A14;padding:72px 0 28px}
       <span class="sp-num">04</span>
       <div class="sp-cat">Building & Landscaping</div>
       <h2>Decks, Fences & Retaining Walls</h2>
-      <p>Enhance and protect your property with quality building and landscaping â€” retaining walls, fencing, deck construction and full landscaping packages.</p>
+      <p>Enhance and protect your property with quality building and landscaping &mdash; retaining walls, fencing, deck construction and full landscaping packages.</p>
       <div class="sp-tags">
         <span class="stag">Retaining Walls</span><span class="stag">Decks</span>
         <span class="stag">Fencing</span><span class="stag">Landscaping</span>
@@ -710,13 +721,13 @@ footer{background:#040A14;padding:72px 0 28px}
         <div class="sec-lbl-l" style="background:rgba(255,255,255,.4)"></div>
       </div>
       <h2 id="proc-h">Our Simple 4-Step Process</h2>
-      <p>From your first call to project completion â€” straightforward, professional, done right.</p>
+      <p>From your first call to project completion &mdash; straightforward, professional, done right.</p>
     </div>
     <div class="proc-steps" role="list">
-      <div class="pstep rv" role="listitem"><div class="pcirc">01</div><h3>Contact Us</h3><p>Call, email or submit a quote request â€” we respond fast.</p></div>
+      <div class="pstep rv" role="listitem"><div class="pcirc">01</div><h3>Contact Us</h3><p>Call, email or submit a quote request &mdash; we respond fast.</p></div>
       <div class="pstep rv d1" role="listitem"><div class="pcirc">02</div><h3>Site Visit</h3><p>We visit your site and provide a clear, detailed quote.</p></div>
       <div class="pstep rv d2" role="listitem"><div class="pcirc">03</div><h3>We Get to Work</h3><p>Our crew mobilises with the right equipment, safely and on schedule.</p></div>
-      <div class="pstep rv d3" role="listitem"><div class="pcirc">04</div><h3>Handover</h3><p>We walk through together â€” 100% satisfied before we leave.</p></div>
+      <div class="pstep rv d3" role="listitem"><div class="pcirc">04</div><h3>Handover</h3><p>We walk through together &mdash; 100% satisfied before we leave.</p></div>
     </div>
   </div>
 </section>
@@ -745,7 +756,7 @@ footer{background:#040A14;padding:72px 0 28px}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
-            <p>Stapp did an outstanding job on our school's bike track. Their professionalism was evident throughout â€” they finished ahead of schedule. The kids absolutely love it!</p>
+            <p>Stapp did an outstanding job on our school's bike track. Their professionalism was evident throughout &mdash; they finished ahead of schedule. The kids absolutely love it!</p>
             <div class="tauth"><div class="tav">SP</div><div><div class="taname">Sarah Parata</div><div class="tarole">Principal, Porirua Primary School</div></div></div>
           </div>
           <div class="tcard" role="article">
@@ -767,7 +778,7 @@ footer{background:#040A14;padding:72px 0 28px}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
-            <p>Stapp tackled a very challenging hillside retaining wall project in Tawa with real expertise. They managed unexpected ground conditions without any drama â€” the result is better than we imagined.</p>
+            <p>Stapp tackled a very challenging hillside retaining wall project in Tawa with real expertise. They managed unexpected ground conditions without any drama &mdash; the result is better than we imagined.</p>
             <div class="tauth"><div class="tav">LT</div><div><div class="taname">Linda Tane</div><div class="tarole">Property Owner, Tawa</div></div></div>
           </div>
         </div>
@@ -782,7 +793,7 @@ footer{background:#040A14;padding:72px 0 28px}
     <div class="cta-in">
       <div class="cta-text rv">
         <h2>Ready to Break Ground?</h2>
-        <p>Free site visit, no-obligation quote â€” fast response guaranteed.</p>
+        <p>Free site visit, no-obligation quote &mdash; fast response guaranteed.</p>
       </div>
       <div class="cta-actions rv d2">
         <a href="#contact" class="btn-white">Get a Free Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -961,7 +972,7 @@ function handleForm(e){
   const btn=document.getElementById('subbtn');
   btn.innerHTML='Sendingâ€¦';btn.disabled=true;
   setTimeout(()=>{
-    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent â€” We\'ll be in touch!';
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent &mdash; We\'ll be in touch!';
     btn.style.background='#1a8c4e';
   },1400);
 }
@@ -981,7 +992,7 @@ if(rdFleet)rdFleet.textContent=fleetVals[0];
 if(rdProj)rdProj.textContent=projVals[0];
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   THREE.JS â€” 3D EXCAVATOR SCENE
+   THREE.JS &mdash; 3D EXCAVATOR SCENE
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function init3D(){
   if(typeof THREE==='undefined')return;
@@ -996,8 +1007,8 @@ function init3D(){
 
   /* Camera */
   const camera=new THREE.PerspectiveCamera(52,W/H,0.1,200);
-  camera.position.set(-6,6,20);
-  camera.lookAt(5,2,0);
+  camera.position.set(-4,6,20);
+  camera.lookAt(9,2,0);
 
   /* Renderer */
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -1054,7 +1065,7 @@ function init3D(){
 
   /* â”€â”€ Excavator Group â”€â”€ */
   const exc=new THREE.Group();
-  exc.position.set(5,0,0);
+  exc.position.set(9,0,0);
   scene.add(exc);
 
   /* Tracks */
@@ -1171,10 +1182,10 @@ function init3D(){
 
     /* Camera orbit */
     const r=18;
-    camera.position.x=Math.sin(T*.04)*5-6;
+    camera.position.x=Math.sin(T*.04)*5-4;
     camera.position.z=Math.cos(T*.04)*14+10;
     camera.position.y=6+Math.sin(T*.08)*1;
-    camera.lookAt(5,2,0);
+    camera.lookAt(9,2,0);
 
     /* Moving light */
     pt1.position.x=Math.sin(T*.3)*8;
