@@ -75,43 +75,43 @@ button,input,select,textarea{font-family:inherit;cursor:none}
 .container{max-width:1280px;margin:0 auto;padding:0 48px}
 
 /* â”€â”€â”€ HERO (3D) â”€â”€â”€ */
-#hero{min-height:100vh;position:relative;overflow:hidden;background:var(--navy3);display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:90px}
+#hero{min-height:100vh;position:relative;overflow:hidden;background:var(--navy3);display:flex;align-items:center}
 #c3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.hv1{position:absolute;inset:0;background:linear-gradient(to right,rgba(6,13,26,.9) 35%,rgba(6,13,26,.15));pointer-events:none;z-index:1}
-.hv2{position:absolute;bottom:0;left:0;right:0;height:280px;background:linear-gradient(to top,var(--navy3),transparent);z-index:1;pointer-events:none}
-.hero-content{position:relative;z-index:2;padding-top:120px}
-.htag{display:flex;align-items:center;gap:12px;margin-bottom:22px;opacity:0;animation:fup .8s .4s forwards}
-.htag-l{width:36px;height:1px;background:var(--blue)}
-.htag span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--bluel);letter-spacing:.2em;text-transform:uppercase}
-.hh1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,10.5vw,148px);color:#fff;line-height:.9;letter-spacing:.02em;margin-bottom:30px}
+.hv1{position:absolute;inset:0;background:linear-gradient(to right,rgba(6,13,26,1) 0%,rgba(6,13,26,1) 38%,rgba(6,13,26,.88) 52%,rgba(6,13,26,.35) 70%,rgba(6,13,26,.05) 90%);pointer-events:none;z-index:1}
+.hv2{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--navy3),transparent);z-index:1;pointer-events:none}
+.hero-content{position:relative;z-index:2;padding-top:100px;padding-bottom:60px;max-width:560px}
+.htag{display:flex;align-items:center;gap:12px;margin-bottom:30px;opacity:0;animation:fup .7s .3s forwards}
+.htag-l{width:32px;height:1px;background:var(--blue);flex-shrink:0}
+.htag span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bluel);letter-spacing:.2em;text-transform:uppercase}
+.hh1{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,9.5vw,136px);color:#fff;line-height:.92;letter-spacing:.02em;margin-bottom:0}
 .hh1 .hl{display:block;overflow:hidden}
 .hh1 .hli{display:block;transform:translateY(110%);animation:su .9s cubic-bezier(.4,0,.2,1) both}
-.hl:nth-child(1) .hli{animation-delay:.25s}
-.hl:nth-child(2) .hli{animation-delay:.4s}
-.hl:nth-child(3) .hli{animation-delay:.55s}
+.hl:nth-child(1) .hli{animation-delay:.2s}
+.hl:nth-child(2) .hli{animation-delay:.35s}
 @keyframes su{to{transform:none}}
-@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 .hh1 em{color:var(--blue);font-style:normal}
-.hsub{font-size:16px;line-height:1.8;color:rgba(255,255,255,.45);max-width:480px;margin-bottom:40px;opacity:0;animation:fup .8s 1s forwards}
-.hbtns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fup .8s 1.2s forwards}
-.btn-solid{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--blue);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:.25s;position:relative;overflow:hidden}
-.btn-solid::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:scaleX(0);transform-origin:left;transition:.3s}
+.hdiv{width:44px;height:2px;background:var(--blue);margin:26px 0 22px;opacity:0;animation:fup .7s .65s forwards}
+.hsub{font-size:15px;line-height:1.85;color:rgba(255,255,255,.65);max-width:430px;margin-bottom:42px;opacity:0;animation:fup .7s .82s forwards;text-shadow:0 1px 20px rgba(6,13,26,.8)}
+.hbtns{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fup .7s 1s forwards}
+.btn-solid{display:inline-flex;align-items:center;gap:10px;padding:17px 34px;background:var(--blue);color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:.25s;position:relative;overflow:hidden;cursor:pointer}
+.btn-solid::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:scaleX(0);transform-origin:left;transition:.3s}
 .btn-solid:hover::before{transform:scaleX(1)}
-.btn-solid:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(78,142,196,.4)}
-.btn-line{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:transparent;color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.22);border-radius:2px;transition:.25s}
-.btn-line:hover{border-color:var(--bluel);color:var(--bluel);transform:translateY(-3px)}
-.hscroll{position:absolute;bottom:36px;right:48px;z-index:3;display:flex;align-items:center;gap:14px;opacity:0;animation:fup 1s 1.8s forwards}
-.hscroll span{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
-.hscroll-bar{width:1px;height:56px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
-.hscroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:55%;background:var(--blue);animation:scrollb 2s ease-in-out infinite}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(78,142,196,.35)}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:17px 34px;background:transparent;color:rgba(255,255,255,.75);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);border-radius:2px;transition:.25s;cursor:pointer}
+.btn-line:hover{border-color:var(--bluel);color:var(--bluel);transform:translateY(-2px)}
+.hscroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fup 1s 1.4s forwards}
+.hscroll span{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.22em;text-transform:uppercase}
+.hscroll-bar{width:1px;height:44px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+.hscroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:50%;background:var(--blue);animation:scrollb 2s ease-in-out infinite}
 @keyframes scrollb{0%{top:-100%}100%{top:200%}}
 
 /* 3D canvas badge - engineering readout */
-.hero-readout{position:absolute;bottom:90px;right:48px;left:auto;z-index:3;opacity:0;animation:fup .8s 1.6s forwards}
-.readout-inner{border:1px solid rgba(78,142,196,.3);background:rgba(6,13,26,.7);backdrop-filter:blur(8px);padding:14px 20px;display:flex;gap:24px}
-.rd{display:flex;flex-direction:column;gap:3px}
-.rd-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(78,142,196,.6);letter-spacing:.15em;text-transform:uppercase}
-.rd-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--bluel);font-weight:500}
+.hero-readout{position:absolute;bottom:28px;right:48px;z-index:3;opacity:0;animation:fup .8s 1.2s forwards}
+.readout-inner{border:1px solid rgba(78,142,196,.22);background:rgba(6,13,26,.65);backdrop-filter:blur(10px);padding:12px 18px;display:flex;gap:20px}
+.rd{display:flex;flex-direction:column;gap:4px}
+.rd-lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:rgba(78,142,196,.5);letter-spacing:.14em;text-transform:uppercase}
+.rd-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--bluel);font-weight:500}
 
 /* â”€â”€â”€ TICKER â”€â”€â”€ */
 .ticker{background:var(--blue);overflow:hidden}
@@ -437,6 +437,7 @@ footer{background:#040A14;padding:72px 0 28px}
         <span class="hl"><span class="hli">Ground</span></span>
         <span class="hl"><span class="hli"><em>Breakers.</em></span></span>
       </h1>
+      <div class=”hdiv”></div>
       <p class=”hsub”>Wellington's civil contracting specialists &mdash; concrete, earthworks, groundwork and civil construction, delivered on time, every time.</p>
       <div class="hbtns">
         <a href="#contact" class="btn-solid">
@@ -995,8 +996,8 @@ function init3D(){
 
   /* Camera */
   const camera=new THREE.PerspectiveCamera(52,W/H,0.1,200);
-  camera.position.set(14,7,12);
-  camera.lookAt(0,2,0);
+  camera.position.set(-6,6,20);
+  camera.lookAt(5,2,0);
 
   /* Renderer */
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
@@ -1053,6 +1054,7 @@ function init3D(){
 
   /* â”€â”€ Excavator Group â”€â”€ */
   const exc=new THREE.Group();
+  exc.position.set(5,0,0);
   scene.add(exc);
 
   /* Tracks */
@@ -1169,10 +1171,10 @@ function init3D(){
 
     /* Camera orbit */
     const r=18;
-    camera.position.x=Math.sin(T*.04)*r+2;
-    camera.position.z=Math.cos(T*.04)*r+3;
-    camera.position.y=7+Math.sin(T*.08)*1.2;
-    camera.lookAt(0,2,0);
+    camera.position.x=Math.sin(T*.04)*5-6;
+    camera.position.z=Math.cos(T*.04)*14+10;
+    camera.position.y=6+Math.sin(T*.08)*1;
+    camera.lookAt(5,2,0);
 
     /* Moving light */
     pt1.position.x=Math.sin(T*.3)*8;
