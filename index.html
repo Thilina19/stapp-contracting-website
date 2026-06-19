@@ -1,0 +1,1217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stapp Contracting â€” Wellington Civil Contractors</title>
+<meta name="description" content="Wellington's civil contracting specialists. Concrete, earthworks, groundwork and civil construction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<style>
+:root{
+  --navy:#1A2744;--navy2:#0F1B33;--navy3:#060D1A;
+  --blue:#4E8EC4;--blue2:#3A78AE;--bluel:#7AADC8;--bluep:#B8D4E4;
+  --white:#fff;--off:#F2F6FA;--muted:#5A6E8A;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button,input,select,textarea{font-family:inherit;cursor:none}
+
+/* â”€â”€â”€ CURSOR â”€â”€â”€ */
+#cur{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cur2{position:fixed;width:34px;height:34px;border:1.5px solid rgba(78,142,196,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+#cur.h{width:44px;height:44px;background:rgba(78,142,196,.12)}
+
+/* â”€â”€â”€ LOADER â”€â”€â”€ */
+#load{position:fixed;inset:0;z-index:9997;background:var(--navy3);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px}
+#load.out{animation:lout .7s ease forwards;pointer-events:none}
+@keyframes lout{to{opacity:0;visibility:hidden}}
+.ld-num{font-family:'Bebas Neue',sans-serif;font-size:100px;color:#fff;line-height:1;letter-spacing:.04em}
+.ld-bar{width:220px;height:1px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+.ld-bar::after{content:'';position:absolute;left:-100%;top:0;height:100%;width:100%;background:var(--blue);animation:lb 1.6s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes lb{to{left:0}}
+.ld-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bluel);letter-spacing:.18em;text-transform:uppercase}
+
+/* â”€â”€â”€ SCROLL BAR â”€â”€â”€ */
+#sbar{position:fixed;top:0;left:0;height:2px;background:var(--blue);z-index:10000;width:0}
+
+/* â”€â”€â”€ BTT â”€â”€â”€ */
+#btt{position:fixed;bottom:32px;right:32px;z-index:500;width:46px;height:46px;background:var(--blue);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s;border-radius:2px}
+#btt.show{opacity:1;transform:none;pointer-events:all}
+#btt:hover{background:var(--blue2)}
+
+/* â”€â”€â”€ NAV â”€â”€â”€ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:22px 0;transition:.4s;background:linear-gradient(to bottom,rgba(6,13,26,.75) 0%,transparent 100%)}
+#nav.solid{background:rgba(6,13,26,.96);backdrop-filter:blur(16px);padding:12px 0;border-bottom:1px solid rgba(78,142,196,.1)}
+.nw{display:flex;align-items:center;justify-content:space-between}
+.nl{display:flex;align-items:center}
+.nl img{height:52px;width:auto}
+.nlinks{display:flex;gap:36px;list-style:none}
+.nlinks a{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;position:relative;transition:.2s}
+.nlinks a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--blue);transition:.3s}
+.nlinks a:hover{color:#fff}
+.nlinks a:hover::after{width:100%}
+.nr{display:flex;align-items:center;gap:16px}
+.ntel{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--bluel);display:flex;align-items:center;gap:6px;transition:.2s}
+.ntel:hover{color:#fff}
+.ncta{font-size:11.5px;font-weight:700;padding:10px 22px;background:var(--blue);color:#fff;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.ncta:hover{background:var(--blue2);transform:translateY(-2px)}
+.ham{display:none;flex-direction:column;gap:5px;padding:8px;cursor:none}
+.ham span{width:22px;height:1.5px;background:#fff;display:block;transition:.3s}
+
+/* â”€â”€â”€ MOB MENU â”€â”€â”€ */
+#mob{position:fixed;inset:0;z-index:895;background:var(--navy2);flex-direction:column;padding:110px 40px 60px;display:none}
+#mob.open{display:flex}
+#mob ul{list-style:none;display:flex;flex-direction:column;gap:28px}
+#mob ul a{font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(255,255,255,.8);letter-spacing:.04em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:28px;transition:color .2s}
+#mob ul a:hover{color:var(--bluel)}
+.mob-close{position:absolute;top:24px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:#fff;cursor:none}
+.mob-bottom{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+
+.container{max-width:1280px;margin:0 auto;padding:0 48px}
+
+/* â”€â”€â”€ HERO (3D) â”€â”€â”€ */
+#hero{min-height:100vh;position:relative;overflow:hidden;background:var(--navy3);display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:90px}
+#c3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hv1{position:absolute;inset:0;background:linear-gradient(to right,rgba(6,13,26,.9) 35%,rgba(6,13,26,.15));pointer-events:none;z-index:1}
+.hv2{position:absolute;bottom:0;left:0;right:0;height:280px;background:linear-gradient(to top,var(--navy3),transparent);z-index:1;pointer-events:none}
+.hero-content{position:relative;z-index:2;padding-top:120px}
+.htag{display:flex;align-items:center;gap:12px;margin-bottom:22px;opacity:0;animation:fup .8s .4s forwards}
+.htag-l{width:36px;height:1px;background:var(--blue)}
+.htag span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--bluel);letter-spacing:.2em;text-transform:uppercase}
+.hh1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,10.5vw,148px);color:#fff;line-height:.9;letter-spacing:.02em;margin-bottom:30px}
+.hh1 .hl{display:block;overflow:hidden}
+.hh1 .hli{display:block;transform:translateY(110%);animation:su .9s cubic-bezier(.4,0,.2,1) both}
+.hl:nth-child(1) .hli{animation-delay:.25s}
+.hl:nth-child(2) .hli{animation-delay:.4s}
+.hl:nth-child(3) .hli{animation-delay:.55s}
+@keyframes su{to{transform:none}}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hh1 em{color:var(--blue);font-style:normal}
+.hsub{font-size:16px;line-height:1.8;color:rgba(255,255,255,.45);max-width:480px;margin-bottom:40px;opacity:0;animation:fup .8s 1s forwards}
+.hbtns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fup .8s 1.2s forwards}
+.btn-solid{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--blue);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:.25s;position:relative;overflow:hidden}
+.btn-solid::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:scaleX(0);transform-origin:left;transition:.3s}
+.btn-solid:hover::before{transform:scaleX(1)}
+.btn-solid:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(78,142,196,.4)}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:transparent;color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.22);border-radius:2px;transition:.25s}
+.btn-line:hover{border-color:var(--bluel);color:var(--bluel);transform:translateY(-3px)}
+.hscroll{position:absolute;bottom:36px;right:48px;z-index:3;display:flex;align-items:center;gap:14px;opacity:0;animation:fup 1s 1.8s forwards}
+.hscroll span{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
+.hscroll-bar{width:1px;height:56px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+.hscroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:55%;background:var(--blue);animation:scrollb 2s ease-in-out infinite}
+@keyframes scrollb{0%{top:-100%}100%{top:200%}}
+
+/* 3D canvas badge - engineering readout */
+.hero-readout{position:absolute;bottom:90px;right:48px;left:auto;z-index:3;opacity:0;animation:fup .8s 1.6s forwards}
+.readout-inner{border:1px solid rgba(78,142,196,.3);background:rgba(6,13,26,.7);backdrop-filter:blur(8px);padding:14px 20px;display:flex;gap:24px}
+.rd{display:flex;flex-direction:column;gap:3px}
+.rd-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(78,142,196,.6);letter-spacing:.15em;text-transform:uppercase}
+.rd-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--bluel);font-weight:500}
+
+/* â”€â”€â”€ TICKER â”€â”€â”€ */
+.ticker{background:var(--blue);overflow:hidden}
+.ttr{display:flex;white-space:nowrap}
+.ttrack{display:inline-flex;animation:tick 22s linear infinite;flex-shrink:0}
+.ti{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;font-size:11px;font-weight:700;color:var(--navy2);letter-spacing:.14em;text-transform:uppercase;border-right:1px solid rgba(26,39,68,.15)}
+.ti-dot{width:5px;height:5px;border-radius:50%;background:var(--navy2);flex-shrink:0;opacity:.5}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+/* â”€â”€â”€ SERVICE PANELS â”€â”€â”€ */
+#services{background:var(--navy2)}
+.sp{display:grid;grid-template-columns:1fr 1fr;min-height:500px}
+.sp:nth-child(even) .sp-txt{order:2}
+.sp:nth-child(even) .sp-im{order:1}
+.sp-txt{display:flex;flex-direction:column;justify-content:center;padding:80px 72px;position:relative;background:var(--navy2)}
+.sp-num{font-family:'Bebas Neue',sans-serif;font-size:100px;color:rgba(78,142,196,.07);position:absolute;top:16px;left:56px;line-height:1;user-select:none;pointer-events:none}
+.sp:nth-child(even) .sp-num{left:auto;right:56px}
+.sp-cat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sp-cat::before{content:'';width:24px;height:1px;background:var(--blue)}
+.sp-txt h2{font-size:clamp(30px,3.2vw,48px);color:#fff;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+.sp-txt p{font-size:14.5px;color:rgba(255,255,255,.45);line-height:1.85;max-width:400px}
+.sp-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.stag{font-size:10.5px;font-weight:600;padding:6px 13px;border:1px solid rgba(78,142,196,.22);color:var(--bluel);letter-spacing:.06em;text-transform:uppercase;border-radius:2px}
+.sp-lnk{display:inline-flex;align-items:center;gap:8px;margin-top:30px;font-size:12px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+.sp-lnk svg{transition:transform .2s}
+.sp-lnk:hover{color:var(--bluel)}
+.sp-lnk:hover svg{transform:translateX(6px)}
+.sp-im{position:relative;overflow:hidden}
+.sp-im img{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(1.15);transition:transform .8s cubic-bezier(.4,0,.2,1);min-height:400px}
+.sp:hover .sp-im img{transform:scale(1.07)}
+.sp-im-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(78,142,196,.2) 0%,transparent 60%);pointer-events:none}
+
+/* â”€â”€â”€ ABOUT â”€â”€â”€ */
+#about{background:var(--navy3);padding:130px 0;overflow:hidden;position:relative}
+#about::before{content:'';position:absolute;top:-150px;right:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(78,142,196,.05) 0%,transparent 70%);pointer-events:none}
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.about-img{position:relative}
+.about-im{width:100%;aspect-ratio:3/4;object-fit:cover}
+.about-fr{position:absolute;inset:-18px;border:1px solid rgba(78,142,196,.2);pointer-events:none}
+.about-fr::before{content:'';position:absolute;top:18px;left:18px;width:72px;height:72px;border-top:2px solid var(--blue);border-left:2px solid var(--blue)}
+.about-fr::after{content:'';position:absolute;bottom:18px;right:18px;width:72px;height:72px;border-bottom:2px solid var(--blue);border-right:2px solid var(--blue)}
+.about-badge{position:absolute;bottom:-32px;right:-32px;background:var(--blue);color:#fff;padding:24px 28px;text-align:center}
+.ab-num{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;display:block}
+.ab-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.8;display:block;margin-top:2px}
+.about-c{}
+.sec-lbl{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.sec-lbl-l{width:28px;height:1px;background:var(--blue)}
+.sec-lbl span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:.18em;text-transform:uppercase}
+.about-c h2{font-size:clamp(32px,4vw,52px);color:#fff;font-weight:800;letter-spacing:-.025em;margin-bottom:22px;line-height:1.05}
+.about-c>p{font-size:15px;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:14px}
+.stats-type{margin:48px 0;border-top:1px solid rgba(78,142,196,.1)}
+.srow{display:flex;align-items:center;gap:28px;padding:22px 0;border-bottom:1px solid rgba(78,142,196,.08)}
+.srow:last-child{border:none}
+.sbig{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,76px);color:var(--blue);line-height:1;min-width:160px;flex-shrink:0}
+.sbig sup{font-size:.5em;color:var(--bluel);vertical-align:super}
+.sdesc{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;line-height:1.6}
+.abtns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-b{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--blue);color:#fff;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:.2s}
+.btn-b:hover{background:var(--blue2);transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,255,255,.05);color:#fff;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);border-radius:2px;transition:.2s}
+.btn-g:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* â”€â”€â”€ PROJECTS MOSAIC â”€â”€â”€ */
+#projects{background:var(--off);padding:120px 0}
+.phead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;flex-wrap:wrap;gap:20px}
+.phead-l h2{font-size:clamp(34px,4.5vw,62px);color:var(--navy);font-weight:800;letter-spacing:-.03em;margin-top:8px}
+.pflts{display:flex;gap:8px;flex-wrap:wrap}
+.pf{font-size:11px;font-weight:700;padding:9px 18px;border:1px solid rgba(26,39,68,.14);color:var(--muted);letter-spacing:.08em;text-transform:uppercase;border-radius:2px;cursor:none;transition:.2s}
+.pf.on,.pf:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mosaic{display:grid;grid-template-columns:5fr 3fr 4fr;grid-template-rows:400px 300px;gap:14px}
+.mc{position:relative;overflow:hidden;cursor:none;background:var(--navy)}
+.mc:nth-child(1){grid-row:span 2}
+.mc img{width:100%;height:100%;object-fit:cover;filter:brightness(.65);transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.mc:hover img{transform:scale(1.08)}
+.mc-inf{position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(to top,rgba(6,13,26,.95),transparent);transform:translateY(6px);transition:.35s}
+.mc:hover .mc-inf{transform:none}
+.mctag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bluel);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;display:block}
+.mc-inf h3{font-size:19px;font-weight:700;color:#fff}
+.mc-inf p{font-size:13px;color:rgba(255,255,255,.4);margin-top:3px}
+.mc-arr{position:absolute;top:18px;right:18px;width:36px;height:36px;background:var(--blue);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(-6px);transition:.3s}
+.mc:hover .mc-arr{opacity:1;transform:none}
+
+/* â”€â”€â”€ AREAS â”€â”€â”€ */
+#areas{background:#fff;padding:100px 0}
+.areas-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.areas-c h2{font-size:clamp(30px,3.5vw,48px);color:var(--navy);font-weight:800;letter-spacing:-.025em;margin:10px 0 24px}
+.areas-c p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px}
+.area-list{display:flex;flex-direction:column;gap:8px}
+.ai{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1px solid rgba(26,39,68,.08);font-size:14px;font-weight:600;color:var(--navy);border-radius:2px;transition:.25s;cursor:none}
+.ai svg{color:var(--blue);flex-shrink:0}
+.ai:hover{border-color:var(--blue);background:rgba(78,142,196,.04);transform:translateX(6px)}
+.hours-c{}
+.hours-c h3{font-size:clamp(26px,3vw,40px);color:var(--navy);font-weight:800;letter-spacing:-.02em;margin:10px 0 32px}
+.hours-card{background:var(--navy);padding:40px}
+.hrow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.hrow:last-child{border:none}
+.hday{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.06em}
+.htime{font-size:14px;font-weight:600;color:#fff}
+.htime.cl{color:rgba(255,255,255,.2)}
+.hours-cta{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+
+/* â”€â”€â”€ PROCESS â”€â”€â”€ */
+#process{background:var(--blue);padding:100px 0;position:relative;overflow:hidden}
+#process::before{content:'BUILD';font-family:'Bebas Neue',sans-serif;font-size:280px;color:rgba(255,255,255,.04);position:absolute;right:-20px;top:50%;transform:translateY(-50%);line-height:1;pointer-events:none;white-space:nowrap}
+.proc-hd{text-align:center;margin-bottom:72px}
+.proc-hd h2{font-size:clamp(30px,4vw,50px);color:#fff;font-weight:800;letter-spacing:-.02em}
+.proc-hd p{font-size:15px;color:rgba(255,255,255,.55);margin-top:10px}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.proc-steps::before{content:'';position:absolute;top:36px;left:12.5%;right:12.5%;height:1px;background:rgba(255,255,255,.18);z-index:0}
+.pstep{text-align:center;padding:0 20px;position:relative;z-index:1}
+.pcirc{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;transition:.3s;box-shadow:0 0 0 8px var(--blue)}
+.pstep:hover .pcirc{background:rgba(255,255,255,.22);transform:scale(1.1)}
+.pstep h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px}
+.pstep p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* â”€â”€â”€ TESTIMONIALS â”€â”€â”€ */
+#testi{background:#fff;padding:120px 0}
+.testi-g{display:grid;grid-template-columns:1fr 1.8fr;gap:80px;align-items:start}
+.testi-l h2{font-size:clamp(28px,3.2vw,46px);color:var(--navy);font-weight:800;letter-spacing:-.02em}
+.testi-l p{font-size:15px;color:var(--muted);line-height:1.8;margin-top:14px}
+.tdots{display:flex;gap:8px;margin-top:32px}
+.tdot{width:10px;height:10px;border-radius:50%;background:rgba(26,39,68,.1);cursor:none;transition:.3s}
+.tdot.on{background:var(--blue);width:28px;border-radius:5px}
+.testi-r{overflow:hidden}
+.testi-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.tcard{flex:0 0 100%;background:var(--off);padding:44px;position:relative}
+.tcard::before{content:'"';font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--blue);opacity:.15;line-height:1;display:block;margin-bottom:4px}
+.tcard-stars{display:flex;gap:3px;margin-bottom:18px}
+.tcard-stars svg{color:var(--blue)}
+.tcard p{font-size:16px;line-height:1.8;color:var(--muted);position:relative;padding-left:18px;margin-bottom:28px}
+.tcard p::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;background:var(--blue)}
+.tauth{display:flex;align-items:center;gap:14px}
+.tav{width:46px;height:46px;border-radius:50%;background:rgba(78,142,196,.12);border:1px solid rgba(78,142,196,.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--blue);flex-shrink:0}
+.taname{font-size:15px;font-weight:700;color:var(--navy)}
+.tarole{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* â”€â”€â”€ CTA BAND â”€â”€â”€ */
+#cta{background:var(--blue);padding:100px 0;position:relative;overflow:hidden}
+#cta::before{content:'CALL';font-family:'Bebas Neue',sans-serif;font-size:300px;color:rgba(255,255,255,.05);position:absolute;left:-20px;top:50%;transform:translateY(-50%);line-height:1;pointer-events:none}
+.cta-in{display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;position:relative;z-index:1}
+.cta-text h2{font-size:clamp(26px,3.5vw,48px);color:#fff;font-weight:800;letter-spacing:-.02em}
+.cta-text p{font-size:16px;color:rgba(255,255,255,.65);margin-top:8px}
+.cta-phone{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);color:#fff;letter-spacing:.02em;line-height:1;display:flex;align-items:center;gap:16px}
+.cta-phone svg{opacity:.7}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;background:#fff;color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:.25s}
+.btn-white:hover{background:var(--navy2);color:#fff;transform:translateY(-2px)}
+.btn-wline{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;background:transparent;color:#fff;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.35);border-radius:2px;transition:.25s}
+.btn-wline:hover{border-color:#fff;transform:translateY(-2px)}
+
+/* â”€â”€â”€ CONTACT â”€â”€â”€ */
+#contact{background:var(--navy2);padding:120px 0}
+.cont-g{display:grid;grid-template-columns:1fr 1.3fr;gap:90px}
+.cont-l .sec-lbl span{color:var(--bluel)}
+.cont-l .sec-lbl-l{background:var(--bluel)}
+.cont-l h2{font-size:clamp(30px,3.5vw,50px);color:#fff;font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
+.cont-l>p{font-size:15px;color:rgba(255,255,255,.4);line-height:1.85;margin-bottom:48px}
+.cinfo{display:flex;flex-direction:column;gap:26px}
+.ci{display:flex;gap:18px;align-items:flex-start}
+.ci-ic{width:48px;height:48px;background:rgba(78,142,196,.1);border:1px solid rgba(78,142,196,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:2px}
+.ci-ic svg{color:var(--blue)}
+.ci-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--bluel);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;display:block}
+.ci-val{font-size:16px;font-weight:500;color:#fff}
+.ci-val a{color:#fff;transition:.2s}
+.ci-val a:hover{color:var(--bluel)}
+.cont-form{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:50px}
+.form-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:32px}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.35);letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#fff;font-size:14px;outline:none;transition:.2s;border-radius:2px}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.18)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue)}
+.fg select{appearance:none}
+.fg select option{background:var(--navy)}
+.fg textarea{resize:vertical;min-height:110px}
+.btn-submit{width:100%;padding:16px;justify-content:center;font-size:13px}
+
+/* â”€â”€â”€ FOOTER â”€â”€â”€ */
+footer{background:#040A14;padding:72px 0 28px}
+.foot-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:52px}
+.foot-logo img{height:46px;width:auto;margin-bottom:18px}
+.foot-logo p{font-size:13px;color:rgba(255,255,255,.25);line-height:1.8;max-width:250px}
+.foot-soc{display:flex;gap:8px;margin-top:20px}
+.foot-soc a{width:36px;height:36px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);transition:.2s;border-radius:2px}
+.foot-soc a:hover{background:var(--blue);color:#fff}
+.foot-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col ul a{font-size:13px;color:rgba(255,255,255,.25);transition:.2s}
+.foot-col ul a:hover{color:var(--bluel)}
+.foot-bot{border-top:1px solid rgba(255,255,255,.04);padding-top:24px;display:flex;align-items:center;justify-content:space-between}
+.foot-bot p{font-size:12px;color:rgba(255,255,255,.18)}
+.foot-bot span{color:var(--bluel)}
+
+/* â”€â”€â”€ REVEAL â”€â”€â”€ */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+.rvl{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
+.rvl.on{opacity:1;transform:none}
+.rvr{opacity:0;transform:translateX(32px);transition:opacity .7s ease,transform .7s ease}
+.rvr.on{opacity:1;transform:none}
+.d1{transition-delay:.1s!important}
+.d2{transition-delay:.2s!important}
+.d3{transition-delay:.3s!important}
+.d4{transition-delay:.4s!important}
+
+/* â”€â”€â”€ RESPONSIVE â”€â”€â”€ */
+@media(max-width:1024px){
+  .about-g{grid-template-columns:1fr;gap:60px}
+  .about-img{display:none}
+  .cont-g{grid-template-columns:1fr}
+  .areas-g{grid-template-columns:1fr;gap:56px}
+  .testi-g{grid-template-columns:1fr;gap:48px}
+  .foot-g{grid-template-columns:1fr 1fr}
+  .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .mc:nth-child(1){grid-row:span 1}
+  .mc:nth-child(n) img{min-height:280px}
+  .sp{grid-template-columns:1fr}
+  .sp:nth-child(even) .sp-txt,.sp:nth-child(even) .sp-im{order:unset}
+  .sp-im img{min-height:300px}
+}
+@media(max-width:768px){
+  .container{padding:0 24px}
+  .nlinks,.nr{display:none}
+  .ham{display:flex}
+  .proc-steps{grid-template-columns:1fr 1fr}
+  .proc-steps::before{display:none}
+  .mosaic{grid-template-columns:1fr}
+  .cta-in{flex-direction:column;text-align:center}
+  .cta-actions{justify-content:center}
+  .foot-g{grid-template-columns:1fr}
+  .frow2{grid-template-columns:1fr}
+  .sp-txt{padding:56px 32px}
+  body{cursor:auto}
+  #cur,#cur2{display:none}
+  a,button{cursor:pointer}
+}
+@media(max-width:480px){
+  .proc-steps{grid-template-columns:1fr}
+  .hbtns{flex-direction:column}
+  .hero-readout{display:none}
+  .sbig{min-width:120px;font-size:52px}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur" aria-hidden="true"></div>
+<div id="cur2" aria-hidden="true"></div>
+<div id="sbar" aria-hidden="true"></div>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- LOADER -->
+<div id="load" role="status" aria-label="Loading">
+  <div class="ld-num" id="ldnum" aria-live="polite">000</div>
+  <div class="ld-bar"></div>
+  <div class="ld-sub">Stapp Contracting</div>
+</div>
+
+<!-- MOBILE MENU -->
+<nav id="mob" aria-label="Mobile menu">
+  <button class="mob-close" onclick="closeMob()" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <ul>
+    <li><a href="#services" onclick="closeMob()">Services <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+    <li><a href="#about" onclick="closeMob()">About <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+    <li><a href="#projects" onclick="closeMob()">Projects <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+    <li><a href="#contact" onclick="closeMob()">Contact <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+  </ul>
+  <div class="mob-bottom">
+    <a href="tel:0279782111" class="btn-solid" style="justify-content:center">Call 027 978 2111</a>
+  </div>
+</nav>
+
+<!-- NAV -->
+<header id="nav" role="banner">
+  <div class="container">
+    <div class="nw">
+      <a href="#hero" class="nl" aria-label="Stapp Contracting home">
+        <img src="logo.png" alt="Stapp Contracting" onerror="this.style.display='none'">
+      </a>
+      <ul class="nlinks" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testi">Reviews</a></li>
+        <li><a href="#areas">Areas</a></li>
+      </ul>
+      <div class="nr">
+        <a href="tel:0279782111" class="ntel" aria-label="Phone number">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          027 978 2111
+        </a>
+        <a href="#contact" class="ncta">
+          Free Quote
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <button class="ham" onclick="openMob()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- â•â•â• HERO â€” 3D â•â•â• -->
+<section id="hero" aria-label="Hero">
+  <canvas id="c3d" aria-hidden="true"></canvas>
+  <div class="hv1" aria-hidden="true"></div>
+  <div class="hv2" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="htag">
+        <div class="htag-l"></div>
+        <span>Wellington &middot; Porirua &middot; Hutt Valley &middot; KÄpiti</span>
+      </div>
+      <h1 class="hh1">
+        <span class="hl"><span class="hli">Ground</span></span>
+        <span class="hl"><span class="hli"><em>Breakers.</em></span></span>
+      </h1>
+      <p class=”hsub”>Wellington's civil contracting specialists &mdash; concrete, earthworks, groundwork and civil construction, delivered on time, every time.</p>
+      <div class="hbtns">
+        <a href="#contact" class="btn-solid">
+          Get a Free Quote
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#projects" class="btn-line">View Our Work</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engineering readout overlay -->
+  <div class="hero-readout" aria-hidden="true">
+    <div class="readout-inner">
+      <div class="rd"><span class="rd-lbl">Fleet</span><span class="rd-val" id="rd-fleet">â€”</span></div>
+      <div class="rd"><span class="rd-lbl">Projects</span><span class="rd-val" id="rd-proj">â€”</span></div>
+      <div class="rd"><span class="rd-lbl">Region</span><span class="rd-val rd-reg">Wellington</span></div>
+    </div>
+  </div>
+
+  <div class="hscroll" aria-hidden="true">
+    <div class="hscroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ttr">
+    <div class="ttrack" id="tt1">
+      <div class="ti"><div class="ti-dot"></div>Concrete Works</div>
+      <div class="ti"><div class="ti-dot"></div>Earthworks</div>
+      <div class="ti"><div class="ti-dot"></div>Groundwork</div>
+      <div class="ti"><div class="ti-dot"></div>Civil & Commercial</div>
+      <div class="ti"><div class="ti-dot"></div>Equipment Hire</div>
+      <div class="ti"><div class="ti-dot"></div>Building & Landscaping</div>
+      <div class="ti"><div class="ti-dot"></div>Retaining Walls</div>
+      <div class="ti"><div class="ti-dot"></div>Wellington NZ</div>
+      <div class="ti"><div class="ti-dot"></div>Concrete Works</div>
+      <div class="ti"><div class="ti-dot"></div>Earthworks</div>
+      <div class="ti"><div class="ti-dot"></div>Groundwork</div>
+      <div class="ti"><div class="ti-dot"></div>Civil & Commercial</div>
+      <div class="ti"><div class="ti-dot"></div>Equipment Hire</div>
+      <div class="ti"><div class="ti-dot"></div>Building & Landscaping</div>
+      <div class="ti"><div class="ti-dot"></div>Retaining Walls</div>
+      <div class="ti"><div class="ti-dot"></div>Wellington NZ</div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â• SERVICES â€” Full-Width Alternating Panels â•â•â• -->
+<section id="services" aria-label="Services">
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">01</span>
+      <div class="sp-cat">Concrete Works</div>
+      <h2>Driveways, Paths & Foundations</h2>
+      <p>From residential driveways to commercial footpaths and structural foundations â€” we deliver quality concrete finishes built to last the Wellington climate.</p>
+      <div class="sp-tags">
+        <span class="stag">Driveways</span><span class="stag">Footpaths</span>
+        <span class="stag">Foundations</span><span class="stag">Asphalting</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="Concrete works" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">02</span>
+      <div class="sp-cat">Earthworks</div>
+      <h2>Precision Earthmoving & Excavation</h2>
+      <p>Large-scale earthmoving, site levelling, land formation and excavation â€” operated by experienced professionals with modern machinery.</p>
+      <div class="sp-tags">
+        <span class="stag">Excavation</span><span class="stag">Site Levelling</span>
+        <span class="stag">Land Formation</span><span class="stag">Subdivisions</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1590496794008-383c8070b257?w=900&q=80" alt="Earthworks" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">03</span>
+      <div class="sp-cat">Groundwork</div>
+      <h2>Foundations, Drainage & Utilities</h2>
+      <p>Complete groundwork solutions â€” foundation excavation, stormwater and wastewater drainage, utility trenching and comprehensive site preparation.</p>
+      <div class="sp-tags">
+        <span class="stag">Foundations</span><span class="stag">Drainage</span>
+        <span class="stag">Utilities</span><span class="stag">Site Prep</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=80" alt="Groundwork" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">04</span>
+      <div class="sp-cat">Building & Landscaping</div>
+      <h2>Decks, Fences & Retaining Walls</h2>
+      <p>Enhance and protect your property with quality building and landscaping â€” retaining walls, fencing, deck construction and full landscaping packages.</p>
+      <div class="sp-tags">
+        <span class="stag">Retaining Walls</span><span class="stag">Decks</span>
+        <span class="stag">Fencing</span><span class="stag">Landscaping</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Building and landscaping" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">05</span>
+      <div class="sp-cat">Civil & Commercial</div>
+      <h2>Schools, Councils & Commercial Sites</h2>
+      <p>Bike tracks, walkways, car parks and large-scale civil infrastructure for schools, councils and commercial developers across Wellington.</p>
+      <div class="sp-tags">
+        <span class="stag">Bike Tracks</span><span class="stag">Schools</span>
+        <span class="stag">Commercial</span><span class="stag">Council Works</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80" alt="Civil and commercial" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+  <div class="sp rv">
+    <div class="sp-txt">
+      <span class="sp-num">06</span>
+      <div class="sp-cat">Equipment Hire</div>
+      <h2>Excavators & Earthmovers for Hire</h2>
+      <p>Modern excavators and earthmovers available with or without an experienced operator across greater Wellington, Porirua and the Hutt Valley.</p>
+      <div class="sp-tags">
+        <span class="stag">Excavators</span><span class="stag">Earthmovers</span>
+        <span class="stag">With Operator</span><span class="stag">Wet Hire</span>
+      </div>
+      <a href="#contact" class="sp-lnk">Enquire Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="sp-im"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&q=80" alt="Equipment hire" loading="lazy"><div class="sp-im-ov"></div></div>
+  </div>
+
+</section>
+
+<!-- â•â•â• ABOUT â•â•â• -->
+<section id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about-g">
+      <div class="about-img rvl">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Stapp Contracting team" class="about-im" loading="lazy">
+        <div class="about-fr" aria-hidden="true"></div>
+        <div class="about-badge" aria-hidden="true">
+          <span class="ab-num">15+</span>
+          <span class="ab-lbl">Years Operating</span>
+        </div>
+      </div>
+      <div class="about-c rvr">
+        <div class="sec-lbl"><div class="sec-lbl-l"></div><span>About Stapp</span></div>
+        <h2 id="about-h">Wellington's Trusted<br>Civil Experts</h2>
+        <p>Based in Tawa, Stapp Contracting has served Wellington's residential and commercial clients for over 15 years. We bring seasoned professionals, modern equipment and a relentless commitment to safety and quality.</p>
+        <p>Whether it's a single residential driveway or a large commercial civil project, we treat every job with the same level of professionalism and precision.</p>
+        <div class="stats-type" role="list">
+          <div class="srow" role="listitem">
+            <span class="sbig cnt" data-t="15"><sup>+</sup></span>
+            <span class="sdesc">Years of Civil<br>Contracting Experience</span>
+          </div>
+          <div class="srow" role="listitem">
+            <span class="sbig cnt" data-t="500"><sup>+</sup></span>
+            <span class="sdesc">Projects Successfully<br>Completed</span>
+          </div>
+          <div class="srow" role="listitem">
+            <span class="sbig cnt" data-t="98"><sup>%</sup></span>
+            <span class="sdesc">Client Satisfaction<br>Rate</span>
+          </div>
+        </div>
+        <div class="abtns">
+          <a href="#contact" class="btn-b">Start Your Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="#projects" class="btn-g">See Our Work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• PROJECTS MOSAIC â•â•â• -->
+<section id="projects" aria-labelledby="proj-h">
+  <div class="container">
+    <div class="phead">
+      <div class="phead-l rv">
+        <div class="sec-lbl"><div class="sec-lbl-l"></div><span>Our Work</span></div>
+        <h2 id="proj-h">Recent Projects</h2>
+      </div>
+      <div class="pflts rv d2" role="group" aria-label="Filter projects">
+        <button class="pf on">All</button>
+        <button class="pf">Concrete</button>
+        <button class="pf">Earthworks</button>
+        <button class="pf">Civil</button>
+      </div>
+    </div>
+    <div class="mosaic rv">
+      <div class="mc">
+        <img src="https://images.unsplash.com/photo-1590496794008-383c8070b257?w=900&q=80" alt="Tawa subdivision earthworks" loading="lazy">
+        <div class="mc-inf"><span class="mctag">Earthworks</span><h3>Tawa Residential Subdivision</h3><p>Full earthworks, drainage & groundwork</p></div>
+        <div class="mc-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="mc">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Karori concrete driveway" loading="lazy">
+        <div class="mc-inf"><span class="mctag">Concrete</span><h3>Karori Driveway</h3><p>Exposed aggregate concrete</p></div>
+        <div class="mc-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="mc">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=80" alt="School bike track civil works" loading="lazy">
+        <div class="mc-inf"><span class="mctag">Civil</span><h3>Porirua School Bike Track</h3><p>Civil construction & asphalt</p></div>
+        <div class="mc-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="mc">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=80" alt="Retaining walls Hutt Valley" loading="lazy">
+        <div class="mc-inf"><span class="mctag">Building</span><h3>Hutt Valley Retaining Walls</h3><p>Engineered block retaining system</p></div>
+        <div class="mc-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="mc">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Commercial earthworks Wellington" loading="lazy">
+        <div class="mc-inf"><span class="mctag">Earthworks</span><h3>Wellington Commercial Site</h3><p>Bulk earthworks & site formation</p></div>
+        <div class="mc-arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• AREAS â•â•â• -->
+<section id="areas" aria-labelledby="areas-h">
+  <div class="container">
+    <div class="areas-g">
+      <div class="areas-c rvl">
+        <div class="sec-lbl"><div class="sec-lbl-l"></div><span>Service Area</span></div>
+        <h2 id="areas-h">Greater Wellington & Beyond</h2>
+        <p>Based in Tawa, we mobilise quickly across the Wellington region for residential and commercial projects of all sizes.</p>
+        <div class="area-list" role="list">
+          <div class="ai" role="listitem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Wellington City</div>
+          <div class="ai" role="listitem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Porirua & Tawa</div>
+          <div class="ai" role="listitem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hutt Valley (Upper & Lower)</div>
+          <div class="ai" role="listitem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>KÄpiti Coast</div>
+          <div class="ai" role="listitem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Wairarapa</div>
+        </div>
+      </div>
+      <div class="hours-c rvr">
+        <div class="sec-lbl"><div class="sec-lbl-l"></div><span>Trading Hours</span></div>
+        <h3>We're Open<br>When You Need Us</h3>
+        <div class="hours-card" role="table" aria-label="Business hours">
+          <div class="hrow"><span class="hday">Monday â€“ Friday</span><span class="htime">7:00 am â€“ 6:00 pm</span></div>
+          <div class="hrow"><span class="hday">Saturday</span><span class="htime">7:00 am â€“ 4:00 pm</span></div>
+          <div class="hrow"><span class="hday">Sunday</span><span class="htime cl">Closed</span></div>
+        </div>
+        <div class="hours-cta">
+          <a href="tel:0279782111" class="btn-b" style="justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>027 978 2111</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• PROCESS â•â•â• -->
+<section id="process" aria-labelledby="proc-h">
+  <div class="container">
+    <div class="proc-hd rv">
+      <div class="sec-lbl" style="justify-content:center;margin-bottom:12px">
+        <div class="sec-lbl-l" style="background:rgba(255,255,255,.4)"></div>
+        <span style="color:rgba(255,255,255,.7)">How We Work</span>
+        <div class="sec-lbl-l" style="background:rgba(255,255,255,.4)"></div>
+      </div>
+      <h2 id="proc-h">Our Simple 4-Step Process</h2>
+      <p>From your first call to project completion â€” straightforward, professional, done right.</p>
+    </div>
+    <div class="proc-steps" role="list">
+      <div class="pstep rv" role="listitem"><div class="pcirc">01</div><h3>Contact Us</h3><p>Call, email or submit a quote request â€” we respond fast.</p></div>
+      <div class="pstep rv d1" role="listitem"><div class="pcirc">02</div><h3>Site Visit</h3><p>We visit your site and provide a clear, detailed quote.</p></div>
+      <div class="pstep rv d2" role="listitem"><div class="pcirc">03</div><h3>We Get to Work</h3><p>Our crew mobilises with the right equipment, safely and on schedule.</p></div>
+      <div class="pstep rv d3" role="listitem"><div class="pcirc">04</div><h3>Handover</h3><p>We walk through together â€” 100% satisfied before we leave.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• TESTIMONIALS â•â•â• -->
+<section id="testi" aria-labelledby="testi-h">
+  <div class="container">
+    <div class="testi-g">
+      <div class="testi-l rvl">
+        <div class="sec-lbl"><div class="sec-lbl-l"></div><span>Reviews</span></div>
+        <h2 id="testi-h">What Our Clients Say</h2>
+        <p>Trusted by homeowners, schools, councils and developers across Wellington for over 15 years.</p>
+        <div class="tdots" id="tdots" role="tablist" aria-label="Testimonial navigation">
+          <button class="tdot on" onclick="goT(0)" aria-label="Testimonial 1" role="tab"></button>
+          <button class="tdot" onclick="goT(1)" aria-label="Testimonial 2" role="tab"></button>
+          <button class="tdot" onclick="goT(2)" aria-label="Testimonial 3" role="tab"></button>
+        </div>
+      </div>
+      <div class="testi-r rvr">
+        <div class="testi-track" id="ttrack">
+          <div class="tcard" role="article">
+            <div class="tcard-stars" aria-label="5 stars">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p>Stapp did an outstanding job on our school's bike track. Their professionalism was evident throughout â€” they finished ahead of schedule. The kids absolutely love it!</p>
+            <div class="tauth"><div class="tav">SP</div><div><div class="taname">Sarah Parata</div><div class="tarole">Principal, Porirua Primary School</div></div></div>
+          </div>
+          <div class="tcard" role="article">
+            <div class="tcard-stars" aria-label="5 stars">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p>We had Stapp do our entire driveway and front landscaping. Exceptional quality, professional team, and the price was very fair. Couldn't recommend them more highly.</p>
+            <div class="tauth"><div class="tav">MJ</div><div><div class="taname">Mark Johnson</div><div class="tarole">Homeowner, Karori</div></div></div>
+          </div>
+          <div class="tcard" role="article">
+            <div class="tcard-stars" aria-label="5 stars">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p>Stapp tackled a very challenging hillside retaining wall project in Tawa with real expertise. They managed unexpected ground conditions without any drama â€” the result is better than we imagined.</p>
+            <div class="tauth"><div class="tav">LT</div><div><div class="taname">Linda Tane</div><div class="tarole">Property Owner, Tawa</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• CTA â•â•â• -->
+<section id="cta" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-in">
+      <div class="cta-text rv">
+        <h2>Ready to Break Ground?</h2>
+        <p>Free site visit, no-obligation quote â€” fast response guaranteed.</p>
+      </div>
+      <div class="cta-actions rv d2">
+        <a href="#contact" class="btn-white">Get a Free Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="tel:0279782111" class="btn-wline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>027 978 2111</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â• CONTACT â•â•â• -->
+<section id="contact" aria-labelledby="cont-h">
+  <div class="container">
+    <div class="cont-g">
+      <div class="cont-l rvl">
+        <div class="sec-lbl"><div class="sec-lbl-l" style="background:var(--bluel)"></div><span style="color:var(--bluel)">Contact Us</span></div>
+        <h2 id="cont-h">Let's Build<br>Something Together</h2>
+        <p>Have a project in mind? Fill in the form and we'll get back to you fast with a free, no-obligation quote.</p>
+        <div class="cinfo">
+          <div class="ci">
+            <div class="ci-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><span class="ci-lbl">Phone</span><p class="ci-val"><a href="tel:0279782111">027 978 2111</a></p></div>
+          </div>
+          <div class="ci">
+            <div class="ci-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><span class="ci-lbl">Email</span><p class="ci-val"><a href="mailto:enquiries@stappcontracting.co.nz">enquiries@stappcontracting.co.nz</a></p></div>
+          </div>
+          <div class="ci">
+            <div class="ci-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><span class="ci-lbl">Address</span><p class="ci-val">214 Main Road, Tawa<br>Wellington 5028, NZ</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="cont-form rvr">
+        <p class="form-title">Send an Enquiry</p>
+        <form onsubmit="handleForm(event)" novalidate>
+          <div class="frow2">
+            <div class="fg"><label for="fn">First Name</label><input type="text" id="fn" placeholder="John" autocomplete="given-name" required></div>
+            <div class="fg"><label for="ln">Last Name</label><input type="text" id="ln" placeholder="Smith" autocomplete="family-name" required></div>
+          </div>
+          <div class="fg"><label for="em">Email</label><input type="email" id="em" placeholder="john@example.com" autocomplete="email" required></div>
+          <div class="fg"><label for="ph">Phone</label><input type="tel" id="ph" placeholder="027 xxx xxxx" autocomplete="tel"></div>
+          <div class="fg">
+            <label for="sv">Service Required</label>
+            <select id="sv" required>
+              <option value="" disabled selected>Select a serviceâ€¦</option>
+              <option>Concrete Works</option><option>Earthworks</option>
+              <option>Groundwork</option><option>Building & Landscaping</option>
+              <option>Civil & Commercial</option><option>Equipment Hire</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="fg"><label for="msg">Project Details</label><textarea id="msg" placeholder="Location, scope, timingâ€¦" required></textarea></div>
+          <button type="submit" class="btn-solid btn-submit" id="subbtn">
+            Send Enquiry
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="foot-g">
+      <div class="foot-logo">
+        <img src="logo.png" alt="Stapp Contracting" onerror="this.style.display='none'">
+        <p>Wellington's specialists in concrete, earthworks, groundwork and civil construction across the greater Wellington region.</p>
+        <div class="foot-soc">
+          <a href="#" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Services</h4><ul><li><a href="#services">Concrete Works</a></li><li><a href="#services">Earthworks</a></li><li><a href="#services">Groundwork</a></li><li><a href="#services">Building & Landscaping</a></li><li><a href="#services">Civil & Commercial</a></li><li><a href="#services">Equipment Hire</a></li></ul></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="#about">About Us</a></li><li><a href="#projects">Projects</a></li><li><a href="#process">Our Process</a></li><li><a href="#testi">Reviews</a></li><li><a href="#areas">Areas We Serve</a></li></ul></div>
+      <div class="foot-col"><h4>Get In Touch</h4><ul><li><a href="tel:0279782111">027 978 2111</a></li><li><a href="mailto:enquiries@stappcontracting.co.nz">Email Us</a></li><li><a href="#contact">Request a Quote</a></li><li><a href="#">214 Main Road, Tawa</a></li><li><a href="#">Wellington 5028</a></li></ul></div>
+    </div>
+    <div class="foot-bot">
+      <p>&copy; 2025 Stapp Contracting Ltd. All rights reserved.</p>
+      <p>Designed in <span>Wellington</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* â”€â”€â”€ LOADER â”€â”€â”€ */
+!(function(){
+  let n=0,el=document.getElementById('ldnum');
+  const iv=setInterval(()=>{
+    n=Math.min(n+Math.ceil(Math.random()*9),100);
+    el&&(el.textContent=String(n).padStart(3,'0'));
+    if(n>=100){clearInterval(iv);setTimeout(()=>document.getElementById('load').classList.add('out'),250)}
+  },20);
+})();
+
+/* â”€â”€â”€ CURSOR â”€â”€â”€ */
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur&&Object.assign(cur.style,{left:mx+'px',top:my+'px'});
+});
+(function lag(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  cur2&&Object.assign(cur2.style,{left:rx+'px',top:ry+'px'});
+  requestAnimationFrame(lag);
+})();
+document.querySelectorAll('a,button,select,input,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur?.classList.add('h'));
+  el.addEventListener('mouseleave',()=>cur?.classList.remove('h'));
+});
+
+/* â”€â”€â”€ SCROLL â”€â”€â”€ */
+const sbar=document.getElementById('sbar'),btt=document.getElementById('btt'),nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const s=scrollY,h=document.body.scrollHeight-innerHeight;
+  sbar&&(sbar.style.width=(s/h*100)+'%');
+  nav?.classList.toggle('solid',s>60);
+  btt?.classList.toggle('show',s>600);
+},{passive:true});
+
+/* â”€â”€â”€ MOBILE MENU â”€â”€â”€ */
+function openMob(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mob').classList.remove('open');document.body.style.overflow=''}
+
+/* â”€â”€â”€ REVEAL â”€â”€â”€ */
+const ro=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target)}});
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>ro.observe(el));
+
+/* â”€â”€â”€ COUNTERS â”€â”€â”€ */
+function cnt(el){
+  const tgt=+el.dataset.t,dur=1800,start=performance.now();
+  const sup=el.querySelector('sup')?.outerHTML||'';
+  (function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const v=Math.floor((1-Math.pow(1-p,4))*tgt);
+    el.innerHTML=v+sup;
+    p<1?requestAnimationFrame(tick):void(el.innerHTML=tgt+sup);
+  })(start);
+}
+const co=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){cnt(e.target);co.unobserve(e.target)}});
+},{threshold:.5});
+document.querySelectorAll('.cnt').forEach(el=>co.observe(el));
+
+/* â”€â”€â”€ TESTIMONIAL SLIDER â”€â”€â”€ */
+let tidx=0;
+function goT(i){
+  tidx=i;
+  document.getElementById('ttrack').style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll('.tdot').forEach((d,j)=>d.classList.toggle('on',j===i));
+}
+setInterval(()=>goT((tidx+1)%3),5500);
+
+/* â”€â”€â”€ PROJECT FILTERS â”€â”€â”€ */
+document.querySelectorAll('.pf').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pf').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+  });
+});
+
+/* â”€â”€â”€ SMOOTH SCROLL â”€â”€â”€ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();scrollTo({top:t.offsetTop-80,behavior:'smooth'})}
+  });
+});
+
+/* â”€â”€â”€ FORM â”€â”€â”€ */
+function handleForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('subbtn');
+  btn.innerHTML='Sendingâ€¦';btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent â€” We\'ll be in touch!';
+    btn.style.background='#1a8c4e';
+  },1400);
+}
+
+/* â”€â”€â”€ HERO READOUT ANIMATION â”€â”€â”€ */
+const rdFleet=document.getElementById('rd-fleet');
+const rdProj=document.getElementById('rd-proj');
+const fleetVals=['3 UNITS','4 UNITS','3 UNITS'];
+const projVals=['500+','498','500+'];
+let ri=0;
+setInterval(()=>{
+  ri=(ri+1)%3;
+  if(rdFleet) rdFleet.textContent=fleetVals[ri];
+  if(rdProj) rdProj.textContent=projVals[ri];
+},2200);
+if(rdFleet)rdFleet.textContent=fleetVals[0];
+if(rdProj)rdProj.textContent=projVals[0];
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   THREE.JS â€” 3D EXCAVATOR SCENE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+function init3D(){
+  if(typeof THREE==='undefined')return;
+  const canvas=document.getElementById('c3d');
+  const W=canvas.offsetWidth||window.innerWidth;
+  const H=canvas.offsetHeight||window.innerHeight;
+
+  /* Scene */
+  const scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x060D1A);
+  scene.fog=new THREE.Fog(0x060D1A,28,65);
+
+  /* Camera */
+  const camera=new THREE.PerspectiveCamera(52,W/H,0.1,200);
+  camera.position.set(14,7,12);
+  camera.lookAt(0,2,0);
+
+  /* Renderer */
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+  renderer.setSize(W,H);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
+  /* Lights */
+  scene.add(new THREE.AmbientLight(0x1A3060,1.8));
+  const dir=new THREE.DirectionalLight(0x7AADC8,2.5);
+  dir.position.set(10,18,8);
+  dir.castShadow=true;
+  dir.shadow.mapSize.width=1024;dir.shadow.mapSize.height=1024;
+  scene.add(dir);
+  const pt1=new THREE.PointLight(0x4E8EC4,3,25);
+  pt1.position.set(-4,8,6);
+  scene.add(pt1);
+  const pt2=new THREE.PointLight(0x1A2744,2,20);
+  pt2.position.set(6,4,-6);
+  scene.add(pt2);
+
+  /* Ground */
+  const ground=new THREE.Mesh(
+    new THREE.PlaneGeometry(100,100),
+    new THREE.MeshLambertMaterial({color:0x0A1220})
+  );
+  ground.rotation.x=-Math.PI/2;
+  ground.receiveShadow=true;
+  scene.add(ground);
+
+  /* Grid */
+  const grid=new THREE.GridHelper(80,40,0x1E3A5F,0x0D2040);
+  grid.position.y=0.02;
+  scene.add(grid);
+
+  /* Earth mounds */
+  const moundMat=new THREE.MeshLambertMaterial({color:0x0D1A2A});
+  [[4,0.4,3,1.5],[6,0.3,5,1.2],[-3,0.3,4,1],[-5,0.5,-2,2]].forEach(([x,y,z,s])=>{
+    const m=new THREE.Mesh(new THREE.SphereGeometry(s,8,5),moundMat);
+    m.position.set(x,y,z);
+    m.scale.y=0.35;
+    m.receiveShadow=true;
+    scene.add(m);
+  });
+
+  /* â”€â”€ Materials â”€â”€ */
+  const matNavy=new THREE.MeshLambertMaterial({color:0x1A2744});
+  const matDark=new THREE.MeshLambertMaterial({color:0x0F1B33});
+  const matBlue=new THREE.MeshLambertMaterial({color:0x4E8EC4});
+  const matBlueL=new THREE.MeshLambertMaterial({color:0x7AADC8});
+  const matTrack=new THREE.MeshLambertMaterial({color:0x080F1C});
+  const matWin=new THREE.MeshLambertMaterial({color:0x7AADC8,transparent:true,opacity:0.55});
+
+  /* â”€â”€ Excavator Group â”€â”€ */
+  const exc=new THREE.Group();
+  scene.add(exc);
+
+  /* Tracks */
+  const trackGeo=new THREE.BoxGeometry(3.2,0.5,0.7);
+  const tL=new THREE.Mesh(trackGeo,matTrack); tL.position.set(0,0.25,1.3); tL.castShadow=true; exc.add(tL);
+  const tR=new THREE.Mesh(trackGeo,matTrack); tR.position.set(0,0.25,-1.3); tR.castShadow=true; exc.add(tR);
+
+  /* Track rollers */
+  const rollerGeo=new THREE.CylinderGeometry(0.3,0.3,0.6,10);
+  [-1.4,0,1.4].forEach(x=>{
+    [1.3,-1.3].forEach(z=>{
+      const r=new THREE.Mesh(rollerGeo,matDark);
+      r.rotation.x=Math.PI/2; r.position.set(x,0.28,z); exc.add(r);
+    });
+  });
+
+  /* Main body */
+  const body=new THREE.Mesh(new THREE.BoxGeometry(2.8,1.1,2.4),matNavy);
+  body.position.y=0.95; body.castShadow=true; exc.add(body);
+
+  /* Counterweight */
+  const cw=new THREE.Mesh(new THREE.BoxGeometry(1.2,0.8,2.2),matDark);
+  cw.position.set(-1.4,0.95,0); cw.castShadow=true; exc.add(cw);
+
+  /* Cab */
+  const cab=new THREE.Mesh(new THREE.BoxGeometry(1.3,0.95,1.5),matNavy);
+  cab.position.set(-0.1,1.95,0.3); cab.castShadow=true; exc.add(cab);
+
+  /* Cab glass panels */
+  const winF=new THREE.Mesh(new THREE.BoxGeometry(0.06,0.55,1),matWin);
+  winF.position.set(0.65,2.0,0.3); exc.add(winF);
+  const winT=new THREE.Mesh(new THREE.BoxGeometry(1.1,0.06,1),matWin);
+  winT.position.set(-0.1,2.45,0.3); exc.add(winT);
+
+  /* Hydraulic lines (thin cylinders) */
+  const hoseGeo=new THREE.CylinderGeometry(0.04,0.04,2.2,6);
+  const hose1=new THREE.Mesh(hoseGeo,new THREE.MeshLambertMaterial({color:0x0A1628}));
+  hose1.position.set(1.2,1.5,-0.2); hose1.rotation.z=0.3; exc.add(hose1);
+
+  /* â”€â”€ Boom pivot â”€â”€ */
+  const boomPiv=new THREE.Group();
+  boomPiv.position.set(1.2,1.4,0);
+  exc.add(boomPiv);
+
+  const boomGeo=new THREE.BoxGeometry(0.4,3.2,0.4);
+  const boomMesh=new THREE.Mesh(boomGeo,matBlue);
+  boomMesh.position.y=1.6; boomMesh.castShadow=true;
+  boomPiv.add(boomMesh);
+
+  /* Boom cylinder */
+  const bcylGeo=new THREE.CylinderGeometry(0.09,0.09,2.4,8);
+  const bcyl=new THREE.Mesh(bcylGeo,new THREE.MeshLambertMaterial({color:0x2A5A88}));
+  bcyl.position.set(-0.3,1.2,0); bcyl.rotation.z=0.5; boomPiv.add(bcyl);
+
+  /* â”€â”€ Stick pivot â”€â”€ */
+  const stickPiv=new THREE.Group();
+  stickPiv.position.set(0,3.2,0);
+  boomPiv.add(stickPiv);
+
+  const stickGeo=new THREE.BoxGeometry(0.3,2.4,0.3);
+  const stickMesh=new THREE.Mesh(stickGeo,matBlueL);
+  stickMesh.position.y=1.2; stickMesh.castShadow=true;
+  stickPiv.add(stickMesh);
+
+  /* Stick cylinder */
+  const scylGeo=new THREE.CylinderGeometry(0.07,0.07,1.8,8);
+  const scyl=new THREE.Mesh(scylGeo,new THREE.MeshLambertMaterial({color:0x3A78AE}));
+  scyl.position.set(-0.22,0.8,0); scyl.rotation.z=-0.4; stickPiv.add(scyl);
+
+  /* â”€â”€ Bucket pivot â”€â”€ */
+  const bucketPiv=new THREE.Group();
+  bucketPiv.position.set(0,2.4,0);
+  stickPiv.add(bucketPiv);
+
+  const bktGeo=new THREE.BoxGeometry(0.95,0.65,0.75);
+  const bktMesh=new THREE.Mesh(bktGeo,matBlue);
+  bktMesh.position.set(0.25,0,0); bktMesh.castShadow=true;
+  bucketPiv.add(bktMesh);
+
+  /* Bucket teeth */
+  [-0.28,0,0.28].forEach(z=>{
+    const tooth=new THREE.Mesh(new THREE.BoxGeometry(0.18,0.28,0.13),matDark);
+    tooth.position.set(0.72,-0.3,z);
+    bucketPiv.add(tooth);
+  });
+
+  /* â”€â”€ Particles â”€â”€ */
+  const pN=400;
+  const pos=new Float32Array(pN*3);
+  for(let i=0;i<pN;i++){
+    pos[i*3]=(Math.random()-.5)*60;
+    pos[i*3+1]=Math.random()*18;
+    pos[i*3+2]=(Math.random()-.5)*60;
+  }
+  const pGeo=new THREE.BufferGeometry();
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const particles=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x4E8EC4,size:0.07,transparent:true,opacity:0.3}));
+  scene.add(particles);
+
+  /* â”€â”€ Animation â”€â”€ */
+  let T=0;
+  function tick(){
+    requestAnimationFrame(tick);
+    T+=0.007;
+
+    /* Digging motion */
+    boomPiv.rotation.z=Math.sin(T*.6)*0.22-0.15;
+    stickPiv.rotation.z=Math.sin(T*.6+1.2)*0.38+0.25;
+    bucketPiv.rotation.z=Math.sin(T*.6+2.4)*0.45-0.2;
+
+    /* Body sway */
+    exc.rotation.y=Math.sin(T*.18)*0.12;
+    exc.position.y=Math.sin(T*.5)*0.02;
+
+    /* Camera orbit */
+    const r=18;
+    camera.position.x=Math.sin(T*.04)*r+2;
+    camera.position.z=Math.cos(T*.04)*r+3;
+    camera.position.y=7+Math.sin(T*.08)*1.2;
+    camera.lookAt(0,2,0);
+
+    /* Moving light */
+    pt1.position.x=Math.sin(T*.3)*8;
+    pt1.position.z=Math.cos(T*.3)*8;
+
+    particles.rotation.y+=0.0006;
+
+    renderer.render(scene,camera);
+  }
+  tick();
+
+  /* Resize */
+  const ro2=new ResizeObserver(()=>{
+    const w=canvas.offsetWidth,h=canvas.offsetHeight;
+    if(!w||!h)return;
+    camera.aspect=w/h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w,h);
+  });
+  ro2.observe(canvas.parentElement);
+
+  /* Hero scroll fade */
+  window.addEventListener('scroll',()=>{
+    const p=Math.min(scrollY/(innerHeight*.7),1);
+    canvas.style.opacity=1-p;
+  },{passive:true});
+}
+
+if(window.innerWidth > 768){
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init3D);
+  } else {
+    init3D();
+  }
+} else {
+  /* Mobile: disable 3D for performance, show gradient bg */
+  const c=document.getElementById('c3d');
+  if(c) c.style.display='none';
+}
+</script>
+</body>
+</html>
